@@ -62,13 +62,13 @@ def check_neghbour(field_check_neighbour = test_field):
     points_to_check_1 = np.where(field_check_neighbour == 1)[0]
     if len(points_to_check_1) > 0:
         for i in points_to_check_1:
-            z = int(field_check_neighbour[i] / (width * height))
-            y = int((field_check_neighbour[i] - z * width * height) / width)
-            x = int(field_check_neighbour[i] - width * (y + height * z))
+            z = int(i / (width * height))
+            y = int((i - z * width * height) / width)
+            x = int(i - width * (y + height * z))
             for a in check_list:
                 for b in check_list:
                     for c in check_list:
-                        check_coords = convert_3d_to_1d(a, b, c, width, height)
+                        check_coords = convert_3d_to_1d(x + a, y + b, z + c, width, height)
                         if field_check_neighbour[check_coords] == 2:
                             field_check_neighbour[check_coords] = 1
                             list_not_busy_index.remove(check_coords)
@@ -78,9 +78,9 @@ def move_points(field_for_move = test_field):
     points_to_move = np.where(field_for_move == 2)[0]
     if len(points_to_move) > 0:
         for i in points_to_move:
-            z = int(field_for_move[i] / (width * height))
-            y = int((field_for_move[i] - z * width * height) / width)
-            x = int(field_for_move[i] - width * (y + height * z))
+            z = int(i / (width * height))
+            y = int((i - z * width * height) / width)
+            x = int(i - width * (y + height * z))
             
             field_for_move[convert_3d_to_1d(x, y, z, width, height)] = 0
             
