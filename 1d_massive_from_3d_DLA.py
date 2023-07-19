@@ -83,6 +83,7 @@ def move_points(field_for_move = test_field):
             x = int(i - width * (y + height * z))
             
             field_for_move[convert_3d_to_1d(x, y, z, width, height)] = 0
+            new_coords = []
             
             for p in ([x, len_x], [y, width] ,[z, height]):
                 a = 0
@@ -90,8 +91,10 @@ def move_points(field_for_move = test_field):
                     p_1 = direction_random_choice()
                     if (p[0] + p_1) > 0 and (p[0] + p_1) < p[1]:
                         p[0] += p_1
+                        new_coords.append(p[0])
                         a = 1
-            field_for_move[convert_3d_to_1d(x, y, z, width, height)] = 2
+                    new_coords.append(p[0])
+            field_for_move[convert_3d_to_1d(new_coords[0], new_coords[1], new_coords[2], width, height)] = 2
             
 counter = 1
 t_c = 0
